@@ -6,7 +6,7 @@ import Inline from 'yet-another-react-lightbox/plugins/inline';
 import Zoom from 'yet-another-react-lightbox/plugins/zoom';
 import 'yet-another-react-lightbox/plugins/captions.css';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
-import images from './images';
+import images from '../utils/images';
 
 export default function Carousel() {
     const [advancedExampleOpen, setAdvancedExampleOpen] = useState(true);

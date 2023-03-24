@@ -77,7 +77,7 @@ const images = imageList.map((img, index) => {
   const id = img.id
   const width = img.width * 4;
   const height = img.height * 4;
-  return {
+  return { 
     src: `/images/${id}`,
     key: `${index}`,
     width,
