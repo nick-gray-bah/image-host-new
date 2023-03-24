@@ -13,7 +13,6 @@ export default function Carousel() {
 
     return (
         <Container>
-            <Typography>508 compliance tools deck</Typography>
             <div
                 style={{
                     maxWidth: '1200px',
