@@ -1,19 +1,13 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { ThemeProvider } from "@mui/material";
-import CssBaseline from "@mui/material/CssBaseline";
-
+import React, { StrictMode } from "react";
+import ReactDOM, { createRoot } from "react-dom/client";
 import App from "./App";
-import theme from "./styles/theme";
 
-const rootElement = document.getElementById("root");
-const root = createRoot(rootElement);
+const axe = require("@axe-core/react");
+axe(React, ReactDOM, 1000);
 
+const root = createRoot(document.getElementById("root"));
 root.render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
+    <App />
   </StrictMode>
 );

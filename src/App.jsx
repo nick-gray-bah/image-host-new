@@ -1,11 +1,14 @@
-import 'yet-another-react-lightbox/styles.css';
-import './styles/App.css';
-import Blog from './components/Blog'
+import "yet-another-react-lightbox/styles.css";
+import Blog from "./components/Blog";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+
+const theme = createTheme({});
 
 export default function App() {
-    return (
-        <>
-            <Blog />
-        </>
-    );
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Blog />
+    </ThemeProvider>
+  );
 }

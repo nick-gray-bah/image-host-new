@@ -1,0 +1,13 @@
+{
+  "ignorePatterns": "/build",
+  "extends": ["react-app", "react-app/jest", "plugin:jsx-a11y/strict"],
+  "plugins": ["eslint-plugin-unused-imports", "jsx-a11y"],
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": "error",
+    "no-unused-imports": "off", // disabling in favor of unused-imports which is --fix (able)
+    "no-unused-vars": "off" // disabling in favor of unused-imports which is --fix (able)
+  }
+}

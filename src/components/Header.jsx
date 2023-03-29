@@ -1,66 +1,65 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import Typography from "@mui/material/Typography";
+import { Tab, Tabs, Toolbar } from "@mui/material";
 
-function Header(props) {
-  const { sections, title } = props;
+function Header({ title }) {
+  // const downloadWhitePaper = () => {
+  //     console.log('downloading...');
+  // };
 
   return (
-    <React.Fragment>
-      <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Button size="small">Subscribe</Button>
+    <>
+      <Toolbar sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Typography
           component="h2"
           variant="h5"
           color="inherit"
-          align="center"
           noWrap
           sx={{ flex: 1 }}
+          onClick={() => console.log("clicked")}
         >
           {title}
         </Typography>
-        <IconButton>
-          <SearchIcon />
-        </IconButton>
-        <Button variant="outlined" size="small">
-          Sign up
-        </Button>
+        <Tabs value="Tax Pro">
+          <Tab value="Tax Pro" label="508 Compliance" />
+          <Tab
+            sx={{ color: "black" }}
+            label="Expertise"
+            value="Expertise"
+            href="https://www.boozallen.com/expertise.html"
+          />
+          <Tab
+            sx={{ color: "black" }}
+            label="Markets"
+            value="Markets"
+            href="https://www.boozallen.com/markets.html"
+          />
+          <Tab
+            sx={{ color: "black" }}
+            label="Insights"
+            value="Insights"
+            href="https://www.boozallen.com/insights.html"
+          />
+          <Tab
+            sx={{ color: "black" }}
+            label="About Us"
+            value="About Us"
+            href="https://www.boozallen.com/about.html"
+          />
+        </Tabs>
       </Toolbar>
       <Toolbar
-        component="nav"
         variant="dense"
-        sx={{ justifyContent: 'space-between', overflowX: 'auto' }}
+        sx={{ justifyContent: "space-between", overflowX: "auto" }}
       >
-        {sections.map((section) => (
-          <Link
-            color="inherit"
-            noWrap
-            key={section.title}
-            variant="body2"
-            href={section.url}
-            sx={{ p: 1, flexShrink: 0 }}
-          >
-            {section.title}
-          </Link>
-        ))}
+        <Typography variant="h6" color="inherit" noWrap sx={{ flex: 1, my: 2 }}>
+          508 Compliance
+        </Typography>
+        {/* <Button variant='outlined' onClick={() => downloadWhitePaper()}>
+                    Dowload the White Paper
+                </Button> */}
       </Toolbar>
-    </React.Fragment>
+    </>
   );
 }
-
-Header.propTypes = {
-  sections: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  title: PropTypes.string.isRequired,
-};
 
 export default Header;
