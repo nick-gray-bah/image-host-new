@@ -29,7 +29,7 @@ const imageList = [
     // height: 1440,
     title: "Axe-core Console Output",
     description:
-      "The axe-core react plugin prints all accessibility issues in the browser console during local development. The advantage of this approach is that tests are run against what is rendered in the browser window and not just a codebase, providing a higher issue discovery rate.",
+      "The axe-core react plugin prints all accessibility issues in the browser console during local development. The advantage of this approach is that running accessibility checks against what is rendered in the browser window provides far better issue discovery then testing the code itself.",
   },
   {
     id: "inline_linting.png",
