@@ -1,10 +1,18 @@
 import Typography from "@mui/material/Typography";
-import { Tab, Tabs, Toolbar } from "@mui/material";
+import { Button, Tab, Tabs, Toolbar } from "@mui/material";
 
 function Header({ title }) {
-  // const downloadWhitePaper = () => {
-  //     console.log('downloading...');
-  // };
+  const downloadWhitePaper = () => {
+    fetch("accessibility-tools.pdf").then((response) => {
+      response.blob().then((blob) => {
+        const fileURL = window.URL.createObjectURL(blob);
+        const alink = document.createElement("a");
+        alink.href = fileURL;
+        alink.download = "accessibility-tools.pdf";
+        alink.click();
+      });
+    });
+  };
 
   return (
     <>
@@ -54,9 +62,9 @@ function Header({ title }) {
         <Typography variant="h6" color="inherit" noWrap sx={{ flex: 1, my: 2 }}>
           508 Compliance
         </Typography>
-        {/* <Button variant='outlined' onClick={() => downloadWhitePaper()}>
-                    Dowload the White Paper
-                </Button> */}
+        <Button variant="outlined" onClick={downloadWhitePaper}>
+          Dowload the White Paper
+        </Button>
       </Toolbar>
     </>
   );
