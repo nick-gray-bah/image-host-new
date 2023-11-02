@@ -42,6 +42,9 @@ jobs:
     needs: download-artifact
     steps:
       - uses: actions/checkout@v3
+      - name: show dir contents
+        shell: bash
+        run: ls -la
       - name: upload decrypted artifact
         uses: actions/upload-artifact@v3
         with:
