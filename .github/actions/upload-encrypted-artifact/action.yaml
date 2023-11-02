@@ -13,20 +13,15 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: show dir contents
-      shell: bash
-      run: ls -la
-    - name: Encrypt file
+    - name: encrypt file
       shell: bash
       run: gpg --symmetric --batch --yes --cipher-algo AES256 --passphrase ${{ inputs.passphrase }} --output ${{ inputs.path }}.gpg ${{ inputs.path }}
-    - name: show dir contents
-      shell: bash
-      run: ls -la
-    - name: Upload file
+    - name: upload encrypted artifact
       uses: actions/upload-artifact@v3
       with:
         name: ${{ inputs.name }}
         path: ${{ inputs.path }}.gpg
-    - name: remove the encrypted file
+        retention-days: 1
+    - name: remove encrypted artifact
       shell: bash
       run: rm -rf ${{ inputs.path }}.gpg && ls -la

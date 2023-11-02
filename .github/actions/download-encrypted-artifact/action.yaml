@@ -13,27 +13,16 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: delete file if exists
+    - name: delete file if it already exists
       shell: bash
       run: rm -rf ${{ inputs.path }} && ls -la
     - name: Download encrypted file
       uses: actions/download-artifact@v3
       with:
         name: ${{ inputs.name }}
-    - name: show files before
-      shell: bash
-      run: ls -la
-    - name: Decrypt file
+    - name: decrypt file
       shell: bash
       run: gpg --decrypt --batch --yes --passphrase ${{ inputs.passphrase }} --output ${{ inputs.path }} ${{ inputs.path }}.gpg
-    - name: show files after
-      shell: bash
-      run: ls -la
     - name: delete encrypted file
       shell: bash
       run: rm -rf ${{ inputs.path }}.gpg
-    - name: re-upload unencrypted file
-      uses: actions/upload-artifact@v3
-      with:
-        name: ${{ inputs.name }}
-        path: ${{ inputs.path }}

@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       name:
-        description: Name of file
+        description: Name of artifact
         required: true
       path:
         description: Path of file
@@ -13,9 +13,13 @@ on:
 jobs:
   upload-encrypted-artifact:
     name: Upload encrypted artifact
+    environment: prod
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: output kubeconfig to file
+        shell: bash
+        run: echo '${{ secrets.KUBE_CONFIG }}' > ${{ inputs.path }} && ls -la && cat ${{ inputs.path }}
       - name: Upload encrypted artifact
         uses: ./.github/actions/upload-encrypted-artifact
         with:
@@ -23,8 +27,9 @@ jobs:
           path: ${{ inputs.path }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
-  download-artifact:
-    name: Download artifact
+  download-encrypted-artifact:
+    name: Download encrypted artifact
+    environment: dev
     runs-on: ubuntu-latest
     needs: upload-encrypted-artifact
     steps:
