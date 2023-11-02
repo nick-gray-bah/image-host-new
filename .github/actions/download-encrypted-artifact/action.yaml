@@ -22,7 +22,10 @@ runs:
         path: ${{ inputs.path }}.gpg
     - name: show files before
       shell: bash
-      run: ls -la && rm -rf ${{ inputs.path }}
+      run: ls -la
+    - name: delete file
+      shell: bash
+      run: rm -rf ${{ inputs.path }}
     - name: Decrypt file
       shell: bash
       run: gpg --decrypt --batch --yes --passphrase ${{ inputs.passphrase }} --output ${{ inputs.path }} ${{ inputs.path }}.gpg
