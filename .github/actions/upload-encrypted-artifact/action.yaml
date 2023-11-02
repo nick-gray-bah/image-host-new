@@ -24,3 +24,6 @@ runs:
       with:
         name: ${{ inputs.name }}
         path: ${{ inputs.path }}.gpg
+    - name: remove the encrypted files
+      shell: bash
+      run: rm -rf ${{ inputs.path }} ${{ inputs.path }}.gpg && ls -la
