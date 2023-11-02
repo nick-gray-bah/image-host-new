@@ -13,9 +13,9 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: delete artifact if it already exists
-      shell: bash
-      run: rm -rf ${{ inputs.path }} && ls -la
+    # - name: delete artifact if it already exists
+    #   shell: bash
+    #   run: rm -rf ${{ inputs.path }} && ls -la
     - name: Download encrypted artifact
       uses: actions/download-artifact@v3
       with:
