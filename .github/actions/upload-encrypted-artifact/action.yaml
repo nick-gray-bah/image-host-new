@@ -1,19 +1,19 @@
 name: Upload Encrypted Artifact
-description: Encrypts file using provided passphrase, then uploads it
+description: Encrypts artifact using provided passphrase, then uploads it
 inputs:
   name:
-    description: Name of file to upload
+    description: Name of artifact
     required: true
   path:
-    description: Path of file to upload
+    description: Path of artifact to encrypt
     required: true
   passphrase:
-    description: Passphrase to encrypt file
+    description: Passphrase used to encrypt artifact
     required: true
 runs:
   using: composite
   steps:
-    - name: encrypt file
+    - name: encrypt artifact
       shell: bash
       run: gpg --symmetric --batch --yes --cipher-algo AES256 --passphrase ${{ inputs.passphrase }} --output ${{ inputs.path }}.gpg ${{ inputs.path }}
     - name: upload encrypted artifact

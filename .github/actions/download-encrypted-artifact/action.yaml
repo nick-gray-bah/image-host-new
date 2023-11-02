@@ -1,28 +1,28 @@
-name: Download artifact
-description: Download a file & retries if necessary
+name: Download Encrypted Artifact
+description: Downloads an artifact, then decrypts it using provided passphrase
 inputs:
   name:
-    description: Name of file to download
+    description: Name of artifact
     required: true
   path:
-    description: Path of file to download
+    description: Path to output decrypted artifact to
     required: true
   passphrase:
-    description: the passphrase with which the file was encrypted
+    description: Passphrase used to encrypt artifact
     required: true
 runs:
   using: composite
   steps:
-    - name: delete file if it already exists
+    - name: delete artifact if it already exists
       shell: bash
       run: rm -rf ${{ inputs.path }} && ls -la
-    - name: Download encrypted file
+    - name: Download encrypted artifact
       uses: actions/download-artifact@v3
       with:
         name: ${{ inputs.name }}
-    - name: decrypt file
+    - name: decrypt artifact
       shell: bash
       run: gpg --decrypt --batch --yes --passphrase ${{ inputs.passphrase }} --output ${{ inputs.path }} ${{ inputs.path }}.gpg
-    - name: delete encrypted file
+    - name: delete encrypted artifact
       shell: bash
       run: cat ${{ inputs.path }} && rm -rf ${{ inputs.path }}.gpg && ls -la
