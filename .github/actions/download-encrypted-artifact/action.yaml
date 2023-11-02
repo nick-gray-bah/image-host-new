@@ -1,0 +1,38 @@
+name: Download artifact
+description: Download a file & retries if necessary
+inputs:
+  name:
+    description: Name of file to download
+    required: true
+  path:
+    description: Path of file to download
+    required: true
+  passphrase:
+    description: the passphrase with which the file was encrypted
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Download file
+      id: download
+      continue-on-error: true
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{ inputs.name }}
+        path: ${{ inputs.path }}
+    - name: Retry file download
+      if: ${{ steps.download.outcome == 'failure' }}
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{ inputs.name }}
+        path: ${{ inputs.path }}
+    - name: show files before
+      shell: bash
+      run: ls -la
+    - name: Decrypt file
+      if: ${{ inputs.decrypt }}
+      shell: bash
+      run: gpg --decrypt --batch --yes --passphrase ${{ inputs.passphrase }} --output ${{ inputs.path }} ${{ inputs.path }}
+    - name: show files after
+      shell: bash
+      run: ls -la

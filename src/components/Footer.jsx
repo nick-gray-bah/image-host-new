@@ -14,7 +14,7 @@ function Copyright() {
       sx={{ py: 1 }}
     >
       {"Copyright ©  "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="https://boozallen.com">
         Booz Allen Hamilton Inc. All Rights Reserved
       </Link>{" "}
       {new Date().getFullYear()}

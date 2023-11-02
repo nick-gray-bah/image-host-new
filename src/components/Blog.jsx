@@ -37,10 +37,10 @@ import Carousel from "./Carousel";
 export default function Blog() {
   return (
     <>
-      <Container maxWidth="lg" sx={{ pb: 4 }}>
-        <Header title="Booz | Allen | Hamilton" />
+      <Header title="Booz | Allen | Hamilton" />
+      <Container maxWidth="lg" sx={{ my: 4 }}>
         <main>
-          <Grid container>
+          <Grid>
             <Carousel />
           </Grid>
           {/* <MainFeaturedPost post={mainFeaturedPost} /> */}

@@ -1,0 +1,26 @@
+name: Upload Encrypted Artifact
+description: Encrypts file using provided passphrase, then uploads it
+inputs:
+  name:
+    description: Name of file to upload
+    required: true
+  path:
+    description: Path of file to upload
+    required: true
+  passphrase:
+    description: Passphrase to encrypt file
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Encrypt file
+      shell: bash
+      run: gpg --symmetric --batch --yes --cipher-algo AES256 --passphrase ${{ inputs.passphrase }} --output ${{ inputs.path }} ${{ inputs.path }}
+    - name: show dir contents
+      shell: bash
+      run: ls -la
+    - name: Upload file
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ inputs.name }}
+        path: ${{ inputs.path }}
