@@ -19,20 +19,14 @@ runs:
       uses: actions/download-artifact@v3
       with:
         name: ${{ inputs.name }}
-        path: ${{ inputs.path }}
-    - name: Retry file download
-      if: ${{ steps.download.outcome == 'failure' }}
-      uses: actions/download-artifact@v3
-      with:
-        name: ${{ inputs.name }}
-        path: ${{ inputs.path }}
+        path: ${{ inputs.path }}.gpg
     - name: show files before
       shell: bash
       run: ls -la
     - name: Decrypt file
       if: ${{ inputs.decrypt }}
       shell: bash
-      run: gpg --decrypt --batch --yes --passphrase ${{ inputs.passphrase }} --output ${{ inputs.path }} ${{ inputs.path }}
+      run: gpg --decrypt --batch --yes --passphrase ${{ inputs.passphrase }} --output ${{ inputs.path }} ${{ inputs.path }}.gpg
     - name: show files after
       shell: bash
       run: ls -la
