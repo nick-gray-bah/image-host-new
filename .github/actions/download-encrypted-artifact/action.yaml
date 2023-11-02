@@ -19,11 +19,10 @@ runs:
       uses: actions/download-artifact@v3
       with:
         name: ${{ inputs.name }}
-        path: ${{ inputs.path }}.gpg
     - name: show files before
       shell: bash
       run: ls -la
-    - name: delete file
+    - name: delete file if exists
       shell: bash
       run: rm -rf ${{ inputs.path }}
     - name: Decrypt file
