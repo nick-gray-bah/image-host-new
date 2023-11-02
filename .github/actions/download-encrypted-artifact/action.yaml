@@ -16,9 +16,7 @@ runs:
     - name: delete file if exists
       shell: bash
       run: rm -rf ${{ inputs.path }} && ls -la
-    - name: Download file
-      id: download
-      continue-on-error: true
+    - name: Download encrypted file
       uses: actions/download-artifact@v3
       with:
         name: ${{ inputs.name }}
@@ -31,3 +29,11 @@ runs:
     - name: show files after
       shell: bash
       run: ls -la
+    - name: delete encrypted file
+      shell: bash
+      run: rm -rf ${{ inputs.path }}.gpg
+    - name: re-upload unencrypted file
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ inputs.name }}
+        path: ${{ inputs.path }}

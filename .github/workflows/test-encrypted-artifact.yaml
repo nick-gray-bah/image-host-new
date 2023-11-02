@@ -35,18 +35,3 @@ jobs:
           name: ${{ inputs.name }}
           path: ${{ inputs.path }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
-
-  upload-artifact:
-    name: upload the decrypted artifact
-    runs-on: ubuntu-latest
-    needs: download-artifact
-    steps:
-      - uses: actions/checkout@v3
-      - name: show dir contents
-        shell: bash
-        run: ls -la
-      - name: upload decrypted artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ inputs.name }}
-          path: ${{ inputs.path }}

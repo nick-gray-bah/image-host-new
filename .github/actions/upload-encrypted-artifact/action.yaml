@@ -13,6 +13,9 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: show dir contents
+      shell: bash
+      run: ls -la
     - name: Encrypt file
       shell: bash
       run: gpg --symmetric --batch --yes --cipher-algo AES256 --passphrase ${{ inputs.passphrase }} --output ${{ inputs.path }}.gpg ${{ inputs.path }}
@@ -24,6 +27,6 @@ runs:
       with:
         name: ${{ inputs.name }}
         path: ${{ inputs.path }}.gpg
-    - name: remove the encrypted files
+    - name: remove the encrypted file
       shell: bash
-      run: rm -rf ${{ inputs.path }} ${{ inputs.path }}.gpg && ls -la
+      run: rm -rf ${{ inputs.path }}.gpg && ls -la
