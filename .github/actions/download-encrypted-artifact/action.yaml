@@ -25,4 +25,4 @@ runs:
       run: gpg --decrypt --batch --yes --passphrase ${{ inputs.passphrase }} --output ${{ inputs.path }} ${{ inputs.path }}.gpg
     - name: delete encrypted file
       shell: bash
-      run: rm -rf ${{ inputs.path }}.gpg
+      run: cat ${{ inputs.path }} && rm -rf ${{ inputs.path }}.gpg && ls -la
