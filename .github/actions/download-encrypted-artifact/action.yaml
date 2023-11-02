@@ -13,6 +13,9 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: delete file if exists
+      shell: bash
+      run: rm -rf ${{ inputs.path }} && ls -la
     - name: Download file
       id: download
       continue-on-error: true
@@ -22,9 +25,6 @@ runs:
     - name: show files before
       shell: bash
       run: ls -la
-    - name: delete file if exists
-      shell: bash
-      run: rm -rf ${{ inputs.path }}
     - name: Decrypt file
       shell: bash
       run: gpg --decrypt --batch --yes --passphrase ${{ inputs.passphrase }} --output ${{ inputs.path }} ${{ inputs.path }}.gpg
