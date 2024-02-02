@@ -1,6 +1,14 @@
 name: Test Encrypted Artifacts
 
 on:
+  workflow_call:
+    inputs:
+      name:
+        description: Name of artifact
+        required: true
+      path:
+        description: Path of file
+        required: true
   workflow_dispatch:
     inputs:
       name:
