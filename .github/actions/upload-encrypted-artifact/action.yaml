@@ -13,6 +13,9 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: print repo name
+      run:  echo "${{ github.event.repository.name }}"
+      shell: bash
     - name: encrypt artifact
       shell: bash
       run: gpg --symmetric --batch --yes --cipher-algo AES256 --passphrase ${{ inputs.passphrase }} --output ${{ inputs.path }}.gpg ${{ inputs.path }}
